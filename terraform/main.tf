@@ -22,6 +22,14 @@ resource "azurerm_subnet" "subnet1" {
   address_prefixes     = ["10.0.1.0/24"]
 }
 
+# Create bastion subnet
+resource "azurerm_subnet" "bastion_subnet" {
+  name                 = "AzureBastionSubnet"
+  resource_group_name  = azurerm_resource_group.rg1.name
+  virtual_network_name = azurerm_virtual_network.vnet1.name
+  address_prefixes     = ["10.0.0.224/27"]
+}
+
 # Create Network Security Group and rule
 resource "azurerm_network_security_group" "nsg1" {
   name                = var.security_group_name
@@ -50,7 +58,7 @@ resource "azurerm_bastion_host" "bastion" {
 
   ip_configuration {
     name                 = "${var.bastion_name}-conf"
-    subnet_id            = azurerm_subnet.subnet1.id
+    subnet_id            = azurerm_subnet.bastion_subnet.id
     public_ip_address_id = azurerm_public_ip.nic1_ip.id
   }
 }
