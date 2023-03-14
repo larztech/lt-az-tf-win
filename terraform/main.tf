@@ -48,6 +48,7 @@ resource "azurerm_public_ip" "nic1_ip" {
   location            = azurerm_resource_group.rg1.location
   resource_group_name = azurerm_resource_group.rg1.name
   allocation_method   = "Static"
+  sku = "Standard"
 }
 
 #Create bastion to connect to VMs
