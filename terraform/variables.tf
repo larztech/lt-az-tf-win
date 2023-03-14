@@ -1,32 +1,29 @@
 variable "location" {
   default = "norwayeast"
 }
-variable "prefix" {
-  default = "lt-tf-win"
-}
 variable "resource_group_name" {
-  default = "${var.prefix}-rg"
+  default = "lt-tf-win-rg"
 }
 variable "vnet_name" {
-  default = "${var.prefix}-vnet"
+  default = "lt-tf-win-vnet"
 }
 variable "subnet_name" {
-  default = "${var.prefix}-subnet"
+  default = "lt-tf-win-subnet"
 }
 variable "bastion_name" {
-  default = "${var.prefix}-bastion"
+  default = "lt-tf-win-bastion"
 }
 variable "bastion_configuration" {
-  default = "${var.prefix}-bastion-conf"
+  default = "lt-tf-win-bastion-conf"
 }
 variable "security_group_name" {
-  default = "${var.prefix}-nsg1"
+  default = "lt-tf-win-nsg1"
 }
 variable "nic1_name" {
-  default = "${var.prefix}-nic1"
+  default = "lt-tf-win-nic1"
 }
 variable "win_vm1_name" {
-  default = "${var.prefix}-vm1"
+  default = "lt-tf-win-vm1"
 }
 variable "win_vm1_sku" {
   default = "2019-Datacenter"
