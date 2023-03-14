@@ -10,6 +10,9 @@ variable "vnet_name" {
 variable "subnet_name" {
   default = "lt-tf-win-subnet"
 }
+variable "public_ip_name" {
+  default = "lt-tf-win-ip1"
+}
 variable "bastion_name" {
   default = "lt-tf-win-bastion"
 }

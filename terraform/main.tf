@@ -81,12 +81,12 @@ data "azurerm_key_vault_secret" "kv_secret" {
 
 # Create Windows Server
 resource "azurerm_windows_virtual_machine" "windows-vm" {
-  depends_on=[azurerm_network_interfac.nic1]
+  depends_on=[azurerm_network_interface.nic1]
   name                  = var.win_vm1_name
   location              = var.location
   resource_group_name   = azurerm_resource_group.rg1.name
   size                  = "Standard_B1s"
-  network_interface_ids = [azurerm_network_interfac.nic1.id]
+  network_interface_ids = [azurerm_network_interface.nic1.id]
   
   computer_name  = var.win_vm1_name
   admin_username = var.win_vm1_admin
