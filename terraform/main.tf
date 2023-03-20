@@ -94,7 +94,7 @@ resource "azurerm_windows_virtual_machine" "windows-vm" {
   name                  = var.win_vm1_name
   location              = var.location
   resource_group_name   = azurerm_resource_group.rg1.name
-  size                  = "Standard_B1s"
+  size                  = "Standard_B1ms"
   network_interface_ids = [azurerm_network_interface.nic1.id]
   
   computer_name  = var.win_vm1_name
