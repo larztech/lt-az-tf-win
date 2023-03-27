@@ -121,10 +121,7 @@ resource "azurerm_automation_account" "automation_acc" {
   name                = "lt-tf-win-auto-account"
   location            = var.location
   resource_group_name = var.resource_group_name
-
-  sku {
-    name = "Basic"
-  }
+  sku_name            = "Basic"
 }
 
 # Install DSC modules used in automation
