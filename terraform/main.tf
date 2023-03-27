@@ -132,7 +132,7 @@ resource "azurerm_automation_module" "psdsc" {
   automation_account_name = azurerm_automation_account.automation_acc.name
 
   module_link {
-    uri = "https://devopsgallerystorage.blob.core.windows.net/packages/psdesiredstateconfiguration.2.0.6.nupkg"
+    uri = "https://devopsgallerystorage.blob.core.windows.net/packages/psdesiredstateconfiguration.3.0.0-beta1.nupkg"
   }
 }
 
