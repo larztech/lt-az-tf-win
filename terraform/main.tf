@@ -117,11 +117,6 @@ resource "azurerm_windows_virtual_machine" "windows-vm" {
   provision_vm_agent       = true
 }
 
-provider "azurerm" {
-  features {}
-}
-
-
 resource "azurerm_automation_account" "automation_acc" {
   name                = "lt-tf-win-auto-account"
   location            = var.location
