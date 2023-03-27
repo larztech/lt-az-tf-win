@@ -116,3 +116,83 @@ resource "azurerm_windows_virtual_machine" "windows-vm" {
   enable_automatic_updates = true
   provision_vm_agent       = true
 }
+
+provider "azurerm" {
+  features {}
+}
+
+
+resource "azurerm_automation_account" "automation_acc" {
+  name                = "lt-tf-win-auto-account"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+
+  sku {
+    name = "Basic"
+  }
+}
+
+# Install DSC modules used in automation
+
+resource "azurerm_automation_module" "psdsc" {
+  name                    = "PSDesiredStateConfiguration"
+  resource_group_name     = var.resource_group_name
+  automation_account_name = azurerm_automation_account.automation_acc.name
+
+  module_link {
+    uri = "https://devopsgallerystorage.blob.core.windows.net/packages/psdesiredstateconfiguration.2.0.6.nupkg"
+  }
+}
+
+resource "azurerm_automation_module" "compdsc" {
+  name                    = "ComputerManagementDsc"
+  resource_group_name     = var.resource_group_name
+  automation_account_name = azurerm_automation_account.automation_acc.name
+
+  module_link {
+    uri = "https://devopsgallerystorage.blob.core.windows.net/packages/computermanagementdsc.9.0.0.nupkg"
+  }
+}
+
+resource "azurerm_automation_module" "addsc" {
+  name                    = "ActiveDirectoryDsc"
+  resource_group_name     = var.resource_group_name
+  automation_account_name = azurerm_automation_account.automation_acc.name
+
+  module_link {
+    uri = "https://devopsgallerystorage.blob.core.windows.net/packages/activedirectorydsc.6.2.0.nupkg"
+  }
+}
+
+# Setup variables used in scripts
+resource "azurerm_automation_variable_string" "DomainName" {
+  name                    = "DomainName"
+  resource_group_name     = var.resource_group_name
+  automation_account_name = azurerm_automation_account.automation_acc.name
+  value                   = var.ad_domainname
+}
+
+resource "azurerm_automation_variable_string" "DomainDN" {
+  name                    = "DomainDN"
+  resource_group_name     = var.resource_group_name
+  automation_account_name = azurerm_automation_account.automation_acc.name
+  value                   = var.ad_domaindn
+}
+
+# Setup credential used in DSC automation
+resource "azurerm_automation_credential" "example" {
+  name                    = "DomainAdmin"
+  resource_group_name     = var.resource_group_name
+  automation_account_name = azurerm_automation_account.automation_acc.name
+  username                = var.win_vm1_admin
+  password                = data.azurerm_key_vault_secret.kv_secret.value
+}
+
+# Install DSC powershell script
+resource "azurerm_automation_dsc_configuration" "example" {
+  name                    = "example-dsc-configuration"
+  resource_group_name     = var.resource_group_name
+  automation_account_name = azurerm_automation_account.automation_acc.name
+  location                = var.location
+  content_embedded        = file("${path.module}/DSC/win-adds.ps1")
+}

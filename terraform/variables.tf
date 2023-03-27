@@ -43,3 +43,9 @@ variable "keyvault_rg" {
 variable "keyvault_secret" {
   default = "win-vm1-password"
 }
+variable "ad_domainname" {
+  default = "larzytech.com"
+}
+variable "ad_domaindn" {
+  default = "CN=larzytech,DN=com"
+}
