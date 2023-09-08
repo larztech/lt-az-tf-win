@@ -136,26 +136,6 @@ resource "azurerm_automation_module" "psdsc" {
   }
 }
 
-resource "azurerm_automation_module" "compdsc" {
-  name                    = "ComputerManagementDsc"
-  resource_group_name     = var.resource_group_name
-  automation_account_name = azurerm_automation_account.automation_acc.name
-
-  module_link {
-    uri = "https://devopsgallerystorage.blob.core.windows.net/packages/computermanagementdsc.9.0.0.nupkg"
-  }
-}
-
-resource "azurerm_automation_module" "addsc" {
-  name                    = "ActiveDirectoryDsc"
-  resource_group_name     = var.resource_group_name
-  automation_account_name = azurerm_automation_account.automation_acc.name
-
-  module_link {
-    uri = "https://devopsgallerystorage.blob.core.windows.net/packages/activedirectorydsc.6.2.0.nupkg"
-  }
-}
-
 # Setup variables used in scripts
 resource "azurerm_automation_variable_string" "DomainName" {
   name                    = "DomainName"
