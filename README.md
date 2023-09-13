@@ -1,3 +1,3 @@
 # lt-tf-demo-win
 
-Setup of windows env in Azure
+A setup of a basic lab environment for Microsoft AD DS to test stuff.
