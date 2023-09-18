@@ -90,7 +90,6 @@ data "azurerm_key_vault_secret" "kv_secret" {
 
 # Create Windows Server
 resource "azurerm_windows_virtual_machine" "windows-vm" {
-  depends_on=[azurerm_network_interface.nic1]
   name                  = var.win_vm1_name
   location              = var.location
   resource_group_name   = azurerm_resource_group.rg1.name
@@ -122,18 +121,6 @@ resource "azurerm_automation_account" "automation_acc" {
   location            = var.location
   resource_group_name = var.resource_group_name
   sku_name            = "Basic"
-}
-
-# Install DSC modules used in automation
-
-resource "azurerm_automation_module" "psdsc" {
-  name                    = "PSDesiredStateConfiguration"
-  resource_group_name     = var.resource_group_name
-  automation_account_name = azurerm_automation_account.automation_acc.name
-
-  module_link {
-    uri = "https://devopsgallerystorage.blob.core.windows.net/packages/psdesiredstateconfiguration.2.0.7.nupkg"
-  }
 }
 
 # Setup variables used in scripts
