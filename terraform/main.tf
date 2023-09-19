@@ -147,6 +147,17 @@ resource "azurerm_automation_credential" "example" {
   password                = data.azurerm_key_vault_secret.kv_secret.value
 }
 
+# Install adds module
+resource "azurerm_automation_module" "addsc" {
+  name                    = "ActiveDirectoryDsc"
+  resource_group_name     = var.resource_group_name
+  automation_account_name = azurerm_automation_account.automation_acc.name
+
+  module_link {
+    uri = "https://devopsgallerystorage.blob.core.windows.net/packages/activedirectorydsc.6.2.0.nupkg"
+  }
+}
+
 # Install DSC powershell script
 resource "azurerm_automation_dsc_configuration" "win_adds" {
   name                    = "DC1"

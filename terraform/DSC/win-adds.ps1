@@ -48,9 +48,9 @@ Configuration DC1
 			RestartCount         = 2
             PsDscRunAsCredential = $domainCred
         }
-		ADOrganizationalUnit 'Demo'
+		ADOrganizationalUnit 'Larzytech'
         {
-            Name                            = "Demo"
+            Name                            = "Larzytech"
             Path                            = "$domainDN"
             ProtectedFromAccidentalDeletion = $true
             Description                     = "TopLevel OU"
