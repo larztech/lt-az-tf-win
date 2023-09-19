@@ -64,7 +64,7 @@ Configuration DC1
             ProtectedFromAccidentalDeletion = $true
             Description                     = "WebServers OU"
 			Ensure                          = 'Present'
-			DependsOn 						= "[ADOrganizationalUnit]Demo"
+			DependsOn 						= "[ADOrganizationalUnit]Larzytech"
 		}
 		ADOrganizationalUnit 'Administration'
         {
@@ -73,7 +73,7 @@ Configuration DC1
             ProtectedFromAccidentalDeletion = $true
             Description                     = "Administration OU"
 			Ensure                          = 'Present'
-			DependsOn 						= "[ADOrganizationalUnit]Demo"
+			DependsOn 						= "[ADOrganizationalUnit]Larzytech"
 		}
 		ADOrganizationalUnit 'AdminUsers'
         {
@@ -91,7 +91,7 @@ Configuration DC1
             ProtectedFromAccidentalDeletion = $true
             Description                     = "ServiceAccounts OU"
 			Ensure                          = 'Present'
-			DependsOn 						= "[ADOrganizationalUnit]Demo"
+			DependsOn 						= "[ADOrganizationalUnit]Larzytech"
 		}
 		ADOrganizationalUnit 'Citrix'
         {
@@ -100,7 +100,7 @@ Configuration DC1
             ProtectedFromAccidentalDeletion = $true
             Description                     = "Citrix OU"
 			Ensure                          = 'Present'
-			DependsOn 						= "[ADOrganizationalUnit]Demo"
+			DependsOn 						= "[ADOrganizationalUnit]Larzytech"
 		}		
 		ADOrganizationalUnit 'Users'
         {
@@ -109,7 +109,7 @@ Configuration DC1
             ProtectedFromAccidentalDeletion = $true
             Description                     = "Users OU"
 			Ensure                          = 'Present'
-			DependsOn 						= "[ADOrganizationalUnit]Demo"
+			DependsOn 						= "[ADOrganizationalUnit]Larzytech"
 		}
 		ADOrganizationalUnit 'Servers'
         {
@@ -118,7 +118,7 @@ Configuration DC1
             ProtectedFromAccidentalDeletion = $true
             Description                     = "Servers OU"
 			Ensure                          = 'Present'
-			DependsOn 						= "[ADOrganizationalUnit]Demo"
+			DependsOn 						= "[ADOrganizationalUnit]Larzytech"
 		}		
 		ADUser	 'test123'
 		{

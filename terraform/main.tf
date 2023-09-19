@@ -40,6 +40,7 @@ resource "azurerm_network_security_group" "nsg1" {
 resource "azurerm_subnet_network_security_group_association" "nsg1_subnet1" {
   subnet_id                 = azurerm_subnet.subnet1.id
   network_security_group_id = azurerm_network_security_group.nsg1.id
+  depends_on = [ azurerm_network_interface.nic1 ]
 }
 
 # Create public IP for Bastion
