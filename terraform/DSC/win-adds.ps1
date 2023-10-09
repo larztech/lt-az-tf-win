@@ -40,11 +40,11 @@ Configuration DC1
 			ForestMode                    = 'WinThreshold'
 			DependsOn 					  = "[WindowsFeature]ADDSInstall"
         }	
-		WaitForADDomain $DomainNameService
+		WaitForADDomain $DomainName
         {
             DomainName           = $DomainName
 			WaitTimeout          = 600
-			RestartCount         = 2
+			RestartCount         = 3
             PsDscRunAsCredential = $domainCred
         }
 		ADOrganizationalUnit 'Larzytech'
