@@ -11,6 +11,10 @@ Configuration DC1
 
 	Node "Localhost"
 	{
+		Computer NewComputerName
+        {
+            Name = "DC1"
+        }  
 
 		WindowsFeature ADDSInstall
 		{
