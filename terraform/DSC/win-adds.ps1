@@ -11,16 +11,11 @@ Configuration DC1
 
 	Node "Localhost"
 	{
-	    Computer NewComputerName
-        {
-            Name = "DC1"
-        }       	
-		
+
 		WindowsFeature ADDSInstall
 		{
 			Ensure = "Present"
 			Name = "AD-Domain-Services"
-			DependsOn = "[Computer]NewComputerName"
 		}
 		WindowsFeature ADDSTools
 		{
@@ -41,7 +36,7 @@ Configuration DC1
 			ForestMode                    = 'WinThreshold'
 			DependsOn 					  = "[WindowsFeature]ADDSInstall"
         }	
-		WaitForADDomain $DomainName
+		WaitForADDomain $DomainNameService
         {
             DomainName           = $DomainName
 			WaitTimeout          = 600
@@ -56,20 +51,10 @@ Configuration DC1
             Description                     = "TopLevel OU"
             Ensure                          = 'Present'
         }
-		
-		ADOrganizationalUnit 'WebServers'
-        {
-            Name                            = "WebServers"
-            Path                            = "OU=Demo,$domainDN"
-            ProtectedFromAccidentalDeletion = $true
-            Description                     = "WebServers OU"
-			Ensure                          = 'Present'
-			DependsOn 						= "[ADOrganizationalUnit]Larzytech"
-		}
 		ADOrganizationalUnit 'Administration'
         {
             Name                            = "Administration"
-            Path                            = "OU=Demo,$domainDN"
+            Path                            = "OU=Larzytech,$domainDN"
             ProtectedFromAccidentalDeletion = $true
             Description                     = "Administration OU"
 			Ensure                          = 'Present'
@@ -78,7 +63,7 @@ Configuration DC1
 		ADOrganizationalUnit 'AdminUsers'
         {
             Name                            = "AdminUsers"
-            Path                            = "OU=Administration,OU=Demo,$domainDN"
+            Path                            = "OU=Administration,OU=Larzytech,$domainDN"
             ProtectedFromAccidentalDeletion = $true
             Description                     = "Administration OU"
 			Ensure                          = 'Present'
@@ -87,25 +72,16 @@ Configuration DC1
 		ADOrganizationalUnit 'ServiceAccounts'
         {
             Name                            = "ServiceAccounts"
-            Path                            = "OU=Demo,$domainDN"
+            Path                            = "OU=Larzytech,$domainDN"
             ProtectedFromAccidentalDeletion = $true
             Description                     = "ServiceAccounts OU"
 			Ensure                          = 'Present'
 			DependsOn 						= "[ADOrganizationalUnit]Larzytech"
-		}
-		ADOrganizationalUnit 'Citrix'
-        {
-            Name                            = "Citrix"
-            Path                            = "OU=Demo,$domainDN"
-            ProtectedFromAccidentalDeletion = $true
-            Description                     = "Citrix OU"
-			Ensure                          = 'Present'
-			DependsOn 						= "[ADOrganizationalUnit]Larzytech"
-		}		
+		}	
 		ADOrganizationalUnit 'Users'
         {
             Name                            = "Users"
-            Path                            = "OU=Demo,$domainDN"
+            Path                            = "OU=Larzytech,$domainDN"
             ProtectedFromAccidentalDeletion = $true
             Description                     = "Users OU"
 			Ensure                          = 'Present'
@@ -114,7 +90,7 @@ Configuration DC1
 		ADOrganizationalUnit 'Servers'
         {
             Name                            = "Servers"
-            Path                            = "OU=Demo,$domainDN"
+            Path                            = "OU=Larzytech,$domainDN"
             ProtectedFromAccidentalDeletion = $true
             Description                     = "Servers OU"
 			Ensure                          = 'Present'
@@ -127,7 +103,7 @@ Configuration DC1
 			Credential = $Cred
 			PasswordNotRequired = $true
 			DomainName = 'larzytech.com'
-			Path = "OU=ServiceAccounts,OU=Demo,$domainDN"
+			Path = "OU=ServiceAccounts,OU=Larzytech,$domainDN"
 			Ensure = 'Present'
 			DependsOn = "[ADOrganizationalUnit]ServiceAccounts"
 			Enabled = $true
