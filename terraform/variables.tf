@@ -29,7 +29,7 @@ variable "win_vm1_name" {
   default = "lt-tf-win-vm1"
 }
 variable "win_vm1_sku" {
-  default = "2019-Datacenter"
+  default = "2022-datacenter-azure-edition"
 }
 variable "win_vm1_admin" {
   default = "win-admin"
