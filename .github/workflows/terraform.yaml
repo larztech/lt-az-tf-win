@@ -39,24 +39,6 @@ jobs:
       id: fmt
       run: terraform fmt -check
       
-    - name: Terraform Init
-      id: init
-      run: terraform init
-      working-directory: ./terraform
-      shell: bash
-      
-    - name: Terraform Validate
-      id: validate
-      run: terraform validate
-      working-directory: ./terraform
-      shell: bash
-
-    - name: Terraform Plan
-      id: plan
-      run: terraform plan -no-color -input=false
-      working-directory: ./terraform
-      shell: bash
-      
     - name: Update Pull Request
       uses: actions/github-script@v6
       if: github.event_name == 'pull_request'
@@ -88,7 +70,25 @@ jobs:
             repo: context.repo.repo,
             body: output
           })
+          
+    - name: Terraform Init
+      id: init
+      run: terraform init
+      working-directory: ./terraform
+      shell: bash
+      
+    - name: Terraform Validate
+      id: validate
+      run: terraform validate
+      working-directory: ./terraform
+      shell: bash
 
+    - name: Terraform Plan
+      id: plan
+      run: terraform plan -no-color -input=false
+      working-directory: ./terraform
+      shell: bash
+      
     - name: Terraform Plan Status
       if: steps.plan.outcome == 'failure'
       run: exit 1
